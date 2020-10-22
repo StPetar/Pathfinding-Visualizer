@@ -1,6 +1,6 @@
 This project was created using [Create React App](https://github.com/facebook/create-react-app).
 
-### Currently hosted at: [My GitHub Pages](https://stpetar.github.io/pathfinding-visualizer/)
+### Currently hosted at: <a href="https://stpetar.github.io/pathfinding-visualizer/" target="_blank">My GitHub Pages</a>
 
 This project is a way for me to get familiar with Web development and mainly HTML, CSS, JS and popular Web dev frameworks
 
