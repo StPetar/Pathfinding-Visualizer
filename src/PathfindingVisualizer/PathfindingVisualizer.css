@@ -1,3 +1,75 @@
 .grid {
-  margin: 100px 0 0;
+  margin: 6rem 0 0;
+}
+
+.btn {
+  border: 1px solid #3498db;
+  background: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  margin: 3rem;
+  transition: 0.6s;
+  position: relative;
+  overflow: hidden;
+}
+.btn_disabled {
+  border: 1px solid #7f8c8d;
+  color: #7f8c8d;
+  background: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  margin: 10px;
+  transition: 0.6s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn_disabled:hover {
+  color: #fff;
+}
+.menu_btn {
+  color: #3498db;
+}
+.menu_btn:hover {
+  color: #fff;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #3498db;
+  z-index: -1;
+  transition: 0.6s;
+}
+.menu_btn::before {
+  bottom: 0;
+  border-radius: 50% 50% 0 0;
+}
+
+.menu_btn:hover::before {
+  height: 180%;
+}
+.btn_disabled::before {
+  bottom: 0;
+  border-radius: 50% 50% 0 0;
+}
+
+.btn_disabled:hover::before {
+  height: 180%;
+}
+.btn_disabled::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #bdc3c7;
+  z-index: -1;
+  transition: 0.6s;
 }

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Node from "./Node/Node";
 import { dijkstra, getNodesInShortestPathOrder } from "../Algorithms/dijkstra";
+import { astar } from "../Algorithms/astar";
+import "../Algorithms/astar";
 import "./PathfindingVisualizer.css";
 
 const START_NODE_ROW = 10;
@@ -65,11 +67,35 @@ export default class PathfindingVisualizer extends Component {
 
   visualizeDijkstra() {
     const { grid } = this.state;
+
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+  }
+  visualizeAstar() {
+    const { grid } = this.state;
+    const startNode = grid[START_NODE_ROW][START_NODE_COL];
+    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const visitedNodesInOrder = astar(grid, startNode, finishNode);
+    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    this.animateAstar(visitedNodesInOrder, nodesInShortestPathOrder);
+  }
+  animateAstar(visitedNodesInOrder, nodesInShortestPathOrder) {
+    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+      if (i === visitedNodesInOrder.length) {
+        setTimeout(() => {
+          this.animateShortestPath(nodesInShortestPathOrder);
+        }, 5 * i);
+        return;
+      }
+      setTimeout(() => {
+        const node = visitedNodesInOrder[i];
+        document.getElementById(`node-${node.row}-${node.col}`).className =
+          "node node-visited";
+      }, 5 * i);
+    }
   }
 
   render() {
@@ -77,8 +103,24 @@ export default class PathfindingVisualizer extends Component {
 
     return (
       <>
-        <button onClick={() => this.visualizeDijkstra()}>
+        <button
+          className="btn menu_btn"
+          onClick={() => this.visualizeDijkstra()}
+        >
           Visualize Dijkstra's Algorithm
+        </button>
+        <button
+          className="btn_disabled"
+          onClick={() => this.visualizeAstar()}
+          disabled
+        >
+          Visualize A* Algorithm [in dev]
+        </button>
+        <button
+          className="btn menu_btn"
+          onClick={() => window.location.reload(false)}
+        >
+          Clear Grid
         </button>
         <div className="grid">
           {grid.map((row, rowIdx) => {
